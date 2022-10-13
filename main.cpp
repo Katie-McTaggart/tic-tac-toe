@@ -151,16 +151,24 @@ int main(){
     cout << "Player 1: Would you like to be \'X\' or \'O\')? ";
     cin >> player1;
 
-    if(player1 == 'X'){
-        player2 = 'O';
-    }
-    else if(player1 == 'O'){
-        player2 = 'X';
-    }
-    else{
+    if((player1 != 'X') && (player1 != '0')){
         cout << "Please input only \'X' or \'O'" << endl;
         cin.ignore(); 
         cin.get();
+
+        if((player1 != 'X') && (player1 != '0')){
+            cout << "Invalid input. Player 1 has been assigned to play X." << endl;
+        }
+        player1 = 'X';
+    }
+    
+    if(player1 == 'O'){
+        player1 = 'O';
+        player2 = 'X';
+    }
+    else if (player1 == 'X'){
+        player1 = 'X';
+        player2 = 'O';
     }
     
     // Obtain the size of the tik tac toe board
@@ -196,6 +204,7 @@ int main(){
     player++; 
     turn++;
 
+    //Check for a tie! (If it is the last turn and someone hasn't won yet)
     if((x!= 1) && (turn == rows*cols)){
         x = 0;
     }
@@ -206,6 +215,8 @@ int main(){
         
         cin.ignore(); 
         cin.get(); 
+
+
     }       
    }
    while(x == -1);
