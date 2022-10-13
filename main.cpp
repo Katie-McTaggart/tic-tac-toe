@@ -1,5 +1,6 @@
 #include <iostream>
 #include <stdlib.h>
+#include <cmath>
 
 using namespace std;
 
@@ -28,8 +29,13 @@ void printBoard(){
             }
         }
 
+        // Create horizontal lines between each row
         if(j < rows-1){
-            cout << "----------" << endl;
+            cout << "-";
+            for(int k = 0; k < cols; k++){
+                cout << "---";
+            }
+            cout << "-" << endl;
         }
     }
 }
@@ -39,7 +45,7 @@ void checkForWin(){
     int i;
     bool win = false;
     
-    // Obtain the size of the tik tac toe board
+    // Obtain the rows and columns of the tik tac toe board
     int rows = sizeof board / sizeof board[0];
     int cols = sizeof board[0] / sizeof(char);
 
@@ -100,12 +106,17 @@ void checkForWin(){
 
 
 int main(){
-    int boxSelection;
     char player1;
     char player2;
-    int move;
 
-    cout << "Would you like to be \'X\' or \'O\')? ";
+
+    int move;
+    int player = 1;
+    int i = 1;
+
+    char mark;
+
+    /*cout << "Would you like to be \'X\' or \'O\')? ";
     cin >> player1;
 
     if(player1 == 'X'){
@@ -116,21 +127,75 @@ int main(){
     }
     else{
         cout << "Please input only \'X' or \'O'" << endl;
+    }*/
+    
+    // Obtain the size of the tik tac toe board1
+    int rows = sizeof board / sizeof board[0];
+    int cols = sizeof board[0] / sizeof(char);
+    
+    cout << "Given the layout below, select the number of which box you would like to place your mark into." << endl;
+    
+    do{
+    printBoard();
+        
+    player=(player%2)?1:2;
+
+    cout << "Player " << player << ", enter your move: ";
+    
+    cin >> move;
+
+    // Determine index values for given input
+    int col_index = (move - 1)%rows;
+    int row_index = floor((move - 1)/rows);
+
+    
+    
+    if( (board[row_index][col_index] != 'X')  && (board[row_index][col_index] != 'O')){
+    
+    // If it is Player 1's turn indicate the move with Player 1's mark (i.e. X or O)
+    mark=(player==1) ? player1 : player2;
+    board[row_index][col_index] = mark;
+
+
+//    i = checkForWin(); 
+
+    //Switch whose turn it is
+    player++;
+
+
+    
+
+    }
+
+    else
+    {
+        cout << "Invalid move. Already a used location or invalid digit" << endl; 
+        
+        cin.ignore(); 
+        cin.get(); 
     }
 
 
+        
+   }
+   while(i == -1);
+   
+
+
+
+    /*
+    cin >> move;
+
+
+    
     cout << "Make your move ";
     cin >> move;
 
     checkForWin();
-
-
-    //createBoard();
-    //cout << "Given the layout above, select the number of which box you would like to place your 'X' into: ";
-    //cin >> boxSelection;
-    
     
     printBoard();
+    */
+
 
     return 0;
 }
