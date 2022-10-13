@@ -45,6 +45,7 @@ int checkForWin(){
     int i;
     int win = -1;
     int count;
+    int totalPlays;
     
     // Obtain the rows and columns of the tik tac toe board
     int rows = sizeof board / sizeof board[0];
@@ -115,12 +116,11 @@ int checkForWin(){
     // Check other diagonal
     count = 0;
     for(j=0; j < rows-1; j++){
-        cout << "d: " << board[j][cols-j-1] << " " << board[j+1][cols-j-2] << endl;
+
         if(board[j][cols-j-1] == board[j+1][cols-j-2]){
             count++;
 
             if(count == rows-1){
-                cout << endl << count << endl;
                 win = 1;
                 return win;
             }
@@ -130,9 +130,7 @@ int checkForWin(){
         }
     }
 
-
-    //check for tie
-
+   
     return -1;
 }
 
@@ -146,6 +144,7 @@ int main(){
     int move;
     int player = 1;
     int x = -1;
+    int turn = 0;
 
     char mark;
 
@@ -195,6 +194,11 @@ int main(){
 
     //Switch whose turn it is
     player++; 
+    turn++;
+
+    if((x!= 1) && (turn == rows*cols)){
+        x = 0;
+    }
     }
 
     else{
@@ -206,25 +210,22 @@ int main(){
    }
    while(x == -1);
    
-   if(x == 1)
-   {
+
+
+   //Someone haw won
+   if(x == 1){
+    
     printBoard();
     cout << "\nGame over! Player " << --player << " wins!" << endl;
    }
 
-
-    /*
-    cin >> move;
-
-
-    
-    cout << "Make your move ";
-    cin >> move;
-
-    checkForWin();
-    
+    //The game was tied
+   if(x == 0){
     printBoard();
-    */
+    cout << "\nCongratulations! You tied!" << endl;
+
+   }
+
 
 
     return 0;
