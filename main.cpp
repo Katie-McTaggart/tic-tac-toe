@@ -151,15 +151,16 @@ int main(){
     cout << "Player 1: Would you like to be \'X\' or \'O\')? ";
     cin >> player1;
 
-    if((player1 != 'X') && (player1 != '0')){
+    if(!((player1 == 'X') || (player1 == '0'))){
         cout << "Please input only \'X' or \'O'" << endl;
         cin.ignore(); 
-        cin.get();
+        cin >> player1;
 
-        if((player1 != 'X') && (player1 != '0')){
+        if(!((player1 == 'X') || (player1 == '0'))){
             cout << "Invalid input. Player 1 has been assigned to play X." << endl;
+            player1 = 'X';
         }
-        player1 = 'X';
+        
     }
     
     if(player1 == 'O'){
